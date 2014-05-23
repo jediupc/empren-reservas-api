@@ -31,8 +31,16 @@ class UsuariHelper extends ApiHelper
     if (!$this->user->es_admin) return self::errorMsg(403, "UPDATE: L'usuari no té permís per actualitzar usuaris");
     $usuari = Usuari::model()->findByPk($id);
     if ($usuari !== null) {
-      $usuari->attributes = $attrs;
-      $usuari->update(); 
+      if (isset($attrs['espai_id'])) {
+        $permis = new Permis();
+        $permis->usuari_id = $usuari->id;
+        $permis->espai_id = $attrs['espai_id'];
+        $permis->insert();
+      }
+      else {
+        $usuari->attributes = $attrs;
+        $usuari->update();
+      } 
       return array('id'=>$usuari->id);
     }
     else return self::errorMsg(404, "UPDATE: No existeix l'usuari amb id=$id");

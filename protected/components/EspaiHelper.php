@@ -31,8 +31,16 @@ class EspaiHelper extends ApiHelper
     if (!$this->user->es_admin) return self::errorMsg(403, "UPDATE: L'usuari no té permís per actualitzar espais");
     $espai = Espai::model()->findByPk($id);
     if ($espai !== null) {
-      $espai->attributes = $attrs;
-      $espai->update(); 
+      if (isset($attrs['usuari_id'])) {
+        $permis = new Permis();
+        $permis->espai_id = $espai->id;
+        $permis->usuari_id = $attrs['usuari_id'];
+        $permis->insert();
+      }
+      else {
+        $espai->attributes = $attrs;
+        $espai->update();
+      } 
       return array('id'=>$espai->id);
     }
     else return self::errorMsg(404, "UPDATE: No existeix l'espai amb id=$id");
