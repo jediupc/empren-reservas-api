@@ -48,11 +48,11 @@ CREATE TABLE permis (
   INDEX espai_has_usuari_FKIndex2(usuari_id),
   FOREIGN KEY(espai_id)
     REFERENCES espai(id)
-      ON DELETE NO ACTION
+      ON DELETE CASCADE
       ON UPDATE NO ACTION,
   FOREIGN KEY(usuari_id)
     REFERENCES usuari(id)
-      ON DELETE NO ACTION
+      ON DELETE CASCADE
       ON UPDATE NO ACTION
 )
 TYPE=InnoDB;
