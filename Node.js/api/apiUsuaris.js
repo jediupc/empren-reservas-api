@@ -1,7 +1,7 @@
 var Usuari = require('../models/usuari');
 
 exports.actionList = function (req, res) {
-  if (req.user.es_admin) {
+  /*if (req.user.es_admin) {
     Usuari.find(req.query, function (err, usuaris) {
       if (err) {
         console.error(new Date().toISOString(), err);
@@ -10,9 +10,9 @@ exports.actionList = function (req, res) {
       else res.json(usuaris);
     });
   }
-  else {
+  else {*/
     res.json([req.user]);
-  }
+  //}
 };
 
 exports.actionShow = function (req, res) {
