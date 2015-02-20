@@ -1,14 +1,15 @@
 var Usuari = require('../models/usuari');
+var jwt = require('jsonwebtoken');
 
-userAuth = null;
+exports.tokenSecret = "jkaLlUISADL3JgsajdniA66a3476dbkjKJSBAajsdhyiISUDYytasd";
 
 exports.authenticate = function(req, res, next) {
-    if (!req.headers.x_username || !req.headers.x_password) {
+    if (!req.body.username || !req.body.password) {
         res.status(401).json({codError: 401, descError: 'Falta nom usuari i/o constrasenya'});
     }
     else {
-        var username = req.headers.x_username;
-        var password = req.headers.x_password;
+        var username = req.body.username;
+        var password = req.body.password;
         Usuari.findOne({nom_usuari: username}, function(err, usuari) {
             if (err) { 
                 console.error(new Date().toISOString(), err);
@@ -18,8 +19,12 @@ exports.authenticate = function(req, res, next) {
                 res.status(401).json({codError: 401, descError: 'Nom usuari i/o constrasenya és incorrecte'});
             }
             else {
-                userAuth = usuari;
-                next();
+                var token = jwt.sign(usuari, exports.tokenSecret, { expiresInMinutes: 120 });
+                var data = {
+                    usuari: usuari,
+                    token: token
+                };
+                res.send(data);
             }
         });
     }

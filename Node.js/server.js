@@ -9,6 +9,7 @@ var apiEspais = require('./api/apiEspais');
 var apiUsuaris = require('./api/apiUsuaris');
 var apiReserves = require('./api/apiReserves');
 var auth = require('./utils/authentication');
+var expressJwt = require('express-jwt');
 
 var app = express();
 app.use(bodyParser());
@@ -61,10 +62,11 @@ mongoose.connection.on('error', function(err) {
 
 // ------------ Routes
 var router = express.Router();
+var authRouter = express.Router();
 
-router.use(function(req, res, next) {
-    auth.authenticate(req, res, next);
-});
+
+
+app.use('/api', expressJwt({secret: auth.tokenSecret})); //It requires the token authentication.
 
 router.route('/espais')
     .get(apiEspais.actionList)
@@ -91,6 +93,11 @@ router.route('/reserves/:id')
     .delete(apiReserves.actionDelete);
 
 app.use('/api', router);
+
+authRouter.route('/authenticate').post(auth.authenticate);
+
+app.use('/', authRouter);
+//eapp.use('/authenticate', auth.authenticate);
 
 // ---------- Server
 var server = https.createServer({
