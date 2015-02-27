@@ -1,7 +1,7 @@
 var Usuari = require('../models/usuari');
 var jwt = require('jsonwebtoken');
 
-exports.tokenSecret = "jkaLlUISADL3JgsajdniA66a3476dbkjKJSBAajsdhyiISUDYytasd";
+exports.tokenSecret = process.env.RESERVES_SECRET || "jkaLlUISADL3JgsajdniA66a3476dbkjKJSBAajsdhyiISUDYytasd";
 
 exports.authenticate = function(req, res, next) {
     if (!req.body.username || !req.body.password) {
