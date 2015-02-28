@@ -1,0 +1,12 @@
+use reserves;
+
+db.addUser('user_reserves', 'pass_reserves');
+
+db.usuaris.insert({nom_usuari: 'user', contrasenya: 'password', nom: 'nom', cognoms: 'cognoms', es_admin: true});
+db.usuaris.insert({nom_usuari: 'user2', contrasenya: 'password2', nom: 'nom2', cognoms: 'cognoms2', es_admin: false});
+
+db.espais.insert({codi: 'A', descripcio: 'Espai A'});
+db.espais.insert({codi: 'B', descripcio: 'Espai B'});
+db.espais.insert({codi: 'C', descripcio: 'Espai C'});
+db.espais.insert({codi: 'D', descripcio: 'Espai D'});
+db.espais.insert({codi: 'E', descripcio: 'Espai E'});
