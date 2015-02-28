@@ -1,1 +1,0 @@
-#Projecte de reserves EmprènUPC

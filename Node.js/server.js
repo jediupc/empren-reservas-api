@@ -100,10 +100,10 @@ app.use('/', authRouter);
 //eapp.use('/authenticate', auth.authenticate);
 
 // ---------- Server
-var server = https.createServer({
+/*var server = https.createServer({
     key: fs.readFileSync('./https/key.pem'),
     cert: fs.readFileSync('./https/cert.pem')
-}, app);
+}, app);*/
 
 /*http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
