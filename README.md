@@ -1,11 +1,5 @@
-empren-reservas-api
-===================
+#Sistema de reserves Emprèn UPC
 
-BackEnd del sistema de reservas del espacio de emprendimiento.
+#Backend del sistema amb Node.JS, Express y MongoDB
 
-* Aplicación web de gestión de reservas para JEDI-UPC (REST API)
-
-* Versión para Node.js (MongoDB / Mongoose, Express, Node.js)
-
-* Probado con una Base de Datos MongoDB.
-  Para precargar la Base de Datos ejecutar los scripts en carpeta mongodb
+API REST consumida per el front end per gestionar les reserves i els espais a l'espai d'emprenedoria de la UPC.
